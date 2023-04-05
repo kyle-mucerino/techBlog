@@ -9,7 +9,7 @@ Post.init(
     body: DataTypes.STRING
   },
   {
-    seqeulize 
+    sequelize 
   }
 );
 

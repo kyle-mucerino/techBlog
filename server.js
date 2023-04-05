@@ -2,13 +2,16 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
-cpnst helpers = require('./utils/helpers');
-
-const app = express();
-const PORT = proces.envPORT || 3001;
+const routes = require('./controllers');
+const helpers = require('./utils/helpers');
 
 const sequelize = require('./config/config');
-const SequelizeStore = require('connet-session-sequelize')(session.Store);
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+const app = express();
+const PORT = process.envPORT || 3001;
+
+const hbs = exphbs.create({ helpers });
 
 const sess = {
   secret: 'Super secret secret',
@@ -21,19 +24,17 @@ const sess = {
   resave: false,
   saveUnitialized: true,
   store: new SequelizeStore({
-    db: sequelize,
-  }),
+    db: sequelize
+  })
 };
 
 app.use(session(sess));
-
-const hbs = exphbs.create({ helpers });
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handelbars');
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(require('./controllers/'));
