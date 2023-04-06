@@ -4,5 +4,7 @@ I turned this repo in but was not satisfied with the work I had done on it so I 
 
 new github repo: https://github.com/kyle-mucerino/tech-blog.git
 
-url: http://localhost:3001/
+url: https://kyle-mucerino.github.io/techBlog/
+
+
 
